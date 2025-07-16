@@ -1,0 +1,23 @@
+app:
+  name: 'subscription-service'
+  version: '1.0.0'
+
+http:
+  host: 0.0.0.0
+  port: ${HTTP_PORT}
+
+log:
+  level: ${LOG_LEVEL}
+
+storage:
+  type: postgres
+  host: ${DB_HOST}
+  port: ${DB_PORT}
+  database: ${DB_NAME}
+  username: ${DB_USER}
+  password: ${DB_PASSWORD}
+  max_pool_size: 20
+
+jwt:
+  secret: ${JWT_SECRET}
+  token_ttl: 120m
