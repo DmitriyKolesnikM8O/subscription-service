@@ -1,0 +1,17 @@
+{"time":"2025-07-17T22:31:04.235334341+03:00", "method":"GET","uri":"/health", "status":200,"error":""}
+{"time":"2025-07-17T22:31:05.552330216+03:00", "method":"GET","uri":"/health", "status":200,"error":""}
+{"time":"2025-07-17T22:31:08.332779966+03:00", "method":"GET","uri":"/", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-17T22:31:13.69219429+03:00", "method":"GET","uri":"/subscriptions", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-17T22:59:05.810793949+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-17T22:59:43.369220923+03:00", "method":"POST","uri":"/api/v1/subscriptions/", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-17T22:59:45.461714033+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-17T23:01:49.335033254+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-17T23:08:35.868669955+03:00", "method":"POST","uri":"/health", "status":405,"error":"code=405, message=Method Not Allowed"}
+{"time":"2025-07-17T23:08:46.273488024+03:00", "method":"GET","uri":"/health", "status":200,"error":""}
+{"time":"2025-07-17T23:09:15.796348328+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-17T23:10:06.889144823+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-17T23:11:52.314531697+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-17T23:13:11.188273113+03:00", "method":"GET","uri":"/api/v1/subscriptions/3", "status":400,"error":""}
+{"time":"2025-07-17T23:14:03.906841877+03:00", "method":"GET","uri":"/api/v1/subscriptions/", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-17T23:14:04.952428747+03:00", "method":"GET","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-17T23:14:17.426568475+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost", "status":400,"error":""}
