@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/DmitriyKolesnikM8O/subscription-service/config"
+	"github.com/DmitriyKolesnikM8O/subscription-service/internal/repo"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/DmitriyKolesnikM8O/subscription-service/pkg/client/postgres"
@@ -28,5 +29,5 @@ func Run(configPath string) {
 	defer pool.Close()
 
 	log.Info("Initializing repositories")
-
+	_ = repo.NewRepositories(pool)
 }
