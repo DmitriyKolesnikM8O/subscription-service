@@ -28,18 +28,18 @@ func (s *subscriptionService) CreateSubscription(
 	startDate time.Time,
 	endDate *time.Time,
 ) (*entity.Subscription, error) {
-	// Валидация
+
 	if serviceName == "" {
-		return nil, errors.New("название сервиса обязательно")
+		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - empty service name")
 	}
 	if price <= 0 {
-		return nil, errors.New("цена должна быть положительной")
+		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - price must be positive")
 	}
 	if startDate.IsZero() {
 		startDate = time.Now().UTC()
 	}
 	if endDate != nil && endDate.Before(startDate) {
-		return nil, errors.New("дата окончания не может быть раньше даты начала")
+		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - end date before start date")
 	}
 
 	sub := entity.Subscription{
@@ -53,7 +53,10 @@ func (s *subscriptionService) CreateSubscription(
 
 	id, err := s.repos.Subscription.CreateSubscription(ctx, sub)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create subscription: %w", err)
+		if errors.Is(err, repoerrs.ErrAlreadyExists) {
+			return nil, fmt.Errorf("SubscriptionService.CreateSubscription - %w", err)
+		}
+		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - repo error: %v", err)
 	}
 
 	sub.ID = id
@@ -67,9 +70,9 @@ func (s *subscriptionService) GetSubscriptionByID(
 	sub, err := s.repos.Subscription.GetSubscriptionByID(ctx, id)
 	if err != nil {
 		if errors.Is(err, repoerrs.ErrNotFound) {
-			return nil, ErrSubscriptionNotFound
+			return nil, fmt.Errorf("SubscriptionService.GetSubscriptionByID - %w", err)
 		}
-		return nil, fmt.Errorf("failed to get subscription: %w", err)
+		return nil, fmt.Errorf("SubscriptionService.GetSubscriptionByID - repo error: %v", err)
 	}
 	return &sub, nil
 }
@@ -81,33 +84,34 @@ func (s *subscriptionService) UpdateSubscription(
 	price int,
 	endDate *time.Time,
 ) error {
-	// Получаем текущую подписку
+	if serviceName == "" {
+		return fmt.Errorf("SubscriptionService.UpdateSubscription - empty service name")
+	}
+	if price <= 0 {
+		return fmt.Errorf("SubscriptionService.UpdateSubscription - price must be positive")
+	}
+
 	current, err := s.repos.Subscription.GetSubscriptionByID(ctx, id)
 	if err != nil {
 		if errors.Is(err, repoerrs.ErrNotFound) {
-			return ErrSubscriptionNotFound
+			return fmt.Errorf("SubscriptionService.UpdateSubscription - %w", err)
 		}
-		return fmt.Errorf("failed to get subscription: %w", err)
+		return fmt.Errorf("SubscriptionService.UpdateSubscription - get sub error: %v", err)
 	}
 
-	// Валидация
-	if serviceName == "" {
-		return errors.New("название сервиса обязательно")
-	}
-	if price <= 0 {
-		return errors.New("цена должна быть положительной")
-	}
 	if endDate != nil && endDate.Before(current.StartDate) {
-		return errors.New("дата окончания не может быть раньше даты начала")
+		return fmt.Errorf("SubscriptionService.UpdateSubscription - end date before start date")
 	}
 
-	// Обновляем поля
 	current.ServiceName = serviceName
 	current.Price = price
 	current.EndDate = endDate
 
 	if err := s.repos.Subscription.UpdateSubscription(ctx, current); err != nil {
-		return fmt.Errorf("failed to update subscription: %w", err)
+		if errors.Is(err, repoerrs.ErrNotFound) {
+			return fmt.Errorf("SubscriptionService.UpdateSubscription - %w", err)
+		}
+		return fmt.Errorf("SubscriptionService.UpdateSubscription - repo error: %v", err)
 	}
 
 	return nil
@@ -119,9 +123,9 @@ func (s *subscriptionService) DeleteSubscription(
 ) error {
 	if err := s.repos.Subscription.DeleteSubscription(ctx, id); err != nil {
 		if errors.Is(err, repoerrs.ErrNotFound) {
-			return ErrSubscriptionNotFound
+			return fmt.Errorf("SubscriptionService.DeleteSubscription - %w", err)
 		}
-		return fmt.Errorf("failed to delete subscription: %w", err)
+		return fmt.Errorf("SubscriptionService.DeleteSubscription - repo error: %v", err)
 	}
 	return nil
 }
@@ -132,7 +136,7 @@ func (s *subscriptionService) ListSubscriptionsByUser(
 ) ([]entity.Subscription, error) {
 	subs, err := s.repos.Subscription.ListSubscriptions(ctx, userID)
 	if err != nil {
-		return nil, fmt.Errorf("failed to list subscriptions: %w", err)
+		return nil, fmt.Errorf("SubscriptionService.ListSubscriptionsByUser - repo error: %v", err)
 	}
 	return subs, nil
 }
@@ -143,20 +147,14 @@ func (s *subscriptionService) CalculateTotalCost(
 	serviceName string,
 	startDate, endDate time.Time,
 ) (int, error) {
-	// Валидация периода
 	if startDate.After(endDate) {
-		return 0, errors.New("неверный временной период")
+		return 0, fmt.Errorf("SubscriptionService.CalculateTotalCost - invalid date range")
 	}
 
 	total, err := s.repos.Report.GetTotalCost(ctx, userID, serviceName, startDate, endDate)
 	if err != nil {
-		return 0, fmt.Errorf("failed to calculate total cost: %w", err)
+		return 0, fmt.Errorf("SubscriptionService.CalculateTotalCost - repo error: %v", err)
 	}
 
 	return total, nil
 }
-
-// Дополнительные ошибки сервиса
-var (
-	ErrSubscriptionNotFound = errors.New("подписка не найдена")
-)
