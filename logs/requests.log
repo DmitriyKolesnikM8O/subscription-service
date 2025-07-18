@@ -15,3 +15,13 @@
 {"time":"2025-07-17T23:14:03.906841877+03:00", "method":"GET","uri":"/api/v1/subscriptions/", "status":404,"error":"code=404, message=Not Found"}
 {"time":"2025-07-17T23:14:04.952428747+03:00", "method":"GET","uri":"/api/v1/subscriptions", "status":400,"error":""}
 {"time":"2025-07-17T23:14:17.426568475+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost", "status":400,"error":""}
+{"time":"2025-07-17T23:27:58.884809652+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-17T23:28:00.686916205+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-17T23:36:59.483478486+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-17T23:37:00.838420524+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-17T23:37:06.241710467+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost", "status":400,"error":""}
+{"time":"2025-07-17T23:44:57.433653593+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-17T23:44:58.75870098+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-17T23:45:45.678058044+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-17T23:46:15.991906518+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:08:52.136508734+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
