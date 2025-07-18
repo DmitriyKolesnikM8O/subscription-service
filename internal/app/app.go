@@ -18,8 +18,24 @@ import (
 	"github.com/DmitriyKolesnikM8O/subscription-service/pkg/httpserver"
 	"github.com/DmitriyKolesnikM8O/subscription-service/pkg/logger"
 	"github.com/DmitriyKolesnikM8O/subscription-service/pkg/validator"
+
+	_ "github.com/DmitriyKolesnikM8O/subscription-service/docs"
 )
 
+// @title           Subscription Service API
+// @version         1.0
+// @description     REST-сервис для агрегирования данных о подписках пользователей
+
+// @contact.name   API Support
+// @contact.email  support@example.com
+
+// @license.name  MIT
+// @license.url   https://opensource.org/licenses/MIT
+
+// @host      localhost:8080
+// @BasePath  /
+
+// @schemes   http
 func Run(configPath string) {
 
 	cfg, err := config.LoadConfig(configPath)

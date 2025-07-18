@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -58,7 +57,6 @@ func (c *SubscriptionController) Create(ctx echo.Context) error {
 		nil,
 	)
 	if err != nil {
-		fmt.Println("%w", err)
 		return HTTPError(err)
 	}
 
@@ -83,7 +81,6 @@ func (c *SubscriptionController) GetByID(ctx echo.Context) error {
 
 	sub, err := c.service.GetSubscriptionByID(ctx.Request().Context(), id)
 	if err != nil {
-		fmt.Println("%w", err)
 		return HTTPError(err)
 	}
 
@@ -194,7 +191,7 @@ func (c *SubscriptionController) ListByUser(ctx echo.Context) error {
 // @Description Возвращает суммарную стоимость подписок за период
 // @Tags Subscriptions
 // @Produce json
-// @Param user_id query string true "ID пользователя"
+// @Param user_id query string false "ID пользователя"
 // @Param service_name query string false "Название сервиса"
 // @Param start_date query string true "Начало периода (MM-YYYY)"
 // @Param end_date query string true "Конец периода (MM-YYYY)"

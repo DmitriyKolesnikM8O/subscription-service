@@ -115,3 +115,83 @@
 {"time":"2025-07-18T13:01:11.164717118+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba", "status":500,"error":"code=500, message={internal server error}"}
 {"time":"2025-07-18T13:01:34.635164128+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba", "status":500,"error":"code=500, message={internal server error}"}
 {"time":"2025-07-18T13:02:30.810106747+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba", "status":200,"error":""}
+{"time":"2025-07-18T22:12:02.87942804+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba", "status":200,"error":""}
+{"time":"2025-07-18T22:12:21.458168842+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e78a5cba&start_date=07-2025&end_date=09-2025", "status":200,"error":""}
+{"time":"2025-07-18T22:12:27.733600425+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e78a5cb&start_date=07-2025&end_date=09-2025", "status":400,"error":""}
+{"time":"2025-07-18T22:12:42.360933437+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e78a5cbf&start_date=07-2025&end_date=09-2025", "status":200,"error":""}
+{"time":"2025-07-18T22:12:50.51150369+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e78a5cbf&start_date=07-2025&end_date=05-2025", "status":422,"error":"code=422, message={start date must be before end date}"}
+{"time":"2025-07-18T22:13:03.346248607+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T22:13:24.663841064+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T22:14:39.319477107+03:00", "method":"PUT","uri":"/api/v1/subscriptions/69610288-3a14-40cb-b2dd-f47022f27482", "status":404,"error":"code=404, message={subscription not found}"}
+{"time":"2025-07-18T22:14:47.258641301+03:00", "method":"PUT","uri":"/api/v1/subscriptions/60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":404,"error":"code=404, message={subscription not found}"}
+{"time":"2025-07-18T22:14:56.560070742+03:00", "method":"PUT","uri":"/api/v1/subscriptions/60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":404,"error":"code=404, message={subscription not found}"}
+{"time":"2025-07-18T22:15:07.053902638+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T22:15:12.867285414+03:00", "method":"PUT","uri":"/api/v1/subscriptions/60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":404,"error":"code=404, message={subscription not found}"}
+{"time":"2025-07-18T22:15:25.249275861+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T22:15:32.605126045+03:00", "method":"PUT","uri":"/api/v1/subscriptions/278361eb-6401-4e3c-b141-d5ced9dd79fe", "status":204,"error":""}
+{"time":"2025-07-18T22:15:42.068426826+03:00", "method":"DELETE","uri":"/api/v1/subscriptions/278361eb-6401-4e3c-b141-d5ced9dd79fe", "status":204,"error":""}
+{"time":"2025-07-18T22:15:46.687482041+03:00", "method":"GET","uri":"/api/v1/subscriptions/278361eb-6401-4e3c-b141-d5ced9dd79fe", "status":404,"error":"code=404, message={subscription not found}"}
+{"time":"2025-07-18T22:15:52.376813925+03:00", "method":"GET","uri":"/api/v1/subscriptions/2", "status":400,"error":""}
+{"time":"2025-07-18T22:16:04.293525475+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T22:19:16.893428653+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T22:19:23.087331229+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T22:19:27.537395273+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T22:19:32.61724739+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T22:19:37.880733601+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T22:19:44.488635582+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T22:39:01.873045689+03:00", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-18T22:39:01.953156988+03:00", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-18T22:39:01.958941243+03:00", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-18T22:39:01.958947948+03:00", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-18T22:39:02.500754867+03:00", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-18T22:39:02.677313341+03:00", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2025-07-18T22:40:22.792405752+03:00", "method":"POST","uri":"/api/v1/api/v1/subscriptions", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-18T22:40:51.086819006+03:00", "method":"POST","uri":"/api/v1/api/v1/subscriptions", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-18T22:42:18.892956088+03:00", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-18T22:42:18.951987264+03:00", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-18T22:42:18.952137632+03:00", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-18T22:42:18.952482509+03:00", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-18T22:42:19.416756669+03:00", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2025-07-18T22:42:19.417760707+03:00", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-18T22:42:47.293289228+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T22:43:03.432760025+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=18b3c2d3-7cb3-4c73-bf94-bc0899dea560", "status":200,"error":""}
+{"time":"2025-07-18T22:43:18.878714397+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=278361eb-6401-4e3c-b141-d5ced9dd79fe", "status":200,"error":""}
+{"time":"2025-07-18T22:43:45.09042964+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=278361eb-6401-4e3c-b141-d5ced9dd79fe&start_date=07-2025&end_date=09-2025", "status":200,"error":""}
+{"time":"2025-07-18T22:44:24.436949305+03:00", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-18T22:44:24.510525416+03:00", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-18T22:44:24.512721854+03:00", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-18T22:44:24.52099616+03:00", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-18T22:44:24.970422693+03:00", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-18T22:44:24.970919265+03:00", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2025-07-18T22:44:36.821885937+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2025&end_date=09-2025", "status":200,"error":""}
+{"time":"2025-07-18T22:44:42.669691523+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=278361eb-6401-4e3c-b141-d5ced9dd79fe&start_date=07-2025&end_date=09-2025", "status":200,"error":""}
+{"time":"2025-07-18T22:44:51.07572518+03:00", "method":"GET","uri":"/api/v1/subscriptions/18b3c2d3-7cb3-4c73-bf94-bc0899dea560", "status":200,"error":""}
+{"time":"2025-07-18T22:45:11.101480965+03:00", "method":"PUT","uri":"/api/v1/subscriptions/18b3c2d3-7cb3-4c73-bf94-bc0899dea560", "status":204,"error":""}
+{"time":"2025-07-18T22:45:19.805120184+03:00", "method":"GET","uri":"/api/v1/subscriptions/18b3c2d3-7cb3-4c73-bf94-bc0899dea560", "status":200,"error":""}
+{"time":"2025-07-18T22:45:28.763211295+03:00", "method":"DELETE","uri":"/api/v1/subscriptions/18b3c2d3-7cb3-4c73-bf94-bc0899dea560", "status":204,"error":""}
+{"time":"2025-07-18T22:45:37.530376743+03:00", "method":"GET","uri":"/api/v1/subscriptions/18b3c2d3-7cb3-4c73-bf94-bc0899dea560", "status":404,"error":"code=404, message={subscription not found}"}
+{"time":"2025-07-18T20:14:06.548914449Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-18T20:14:06.600095674Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-18T20:14:06.603851249Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-18T20:14:06.61081666Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-18T20:14:06.925837843Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-18T20:14:07.028057887Z", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2025-07-18T20:14:47.633456753Z", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T20:15:08.319459371Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=18b3c2d3-7cb3-4c73-bf94-bc0899dea561", "status":200,"error":""}
+{"time":"2025-07-18T20:15:21.267213554Z", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T20:15:26.0000715Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=18b3c2d3-7cb3-4c73-bf94-bc0899dea561", "status":200,"error":""}
+{"time":"2025-07-18T20:15:39.586825402Z", "method":"GET","uri":"/api/v1/subscriptions/1fcfece4-8db2-4a17-9b5c-bb6bc44caf4c", "status":200,"error":""}
+{"time":"2025-07-18T20:15:59.547409217Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=18b3c2d3-7cb3-4c73-bf94-bc0899dea561&start_date=04-2024&end_date=04-2025", "status":200,"error":""}
+{"time":"2025-07-18T20:16:04.416639803Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=18b3c2d3-7cb3-4c73-bf94-bc0899dea561&service_name=Twitch&start_date=04-2024&end_date=04-2025", "status":200,"error":""}
+{"time":"2025-07-18T20:16:07.932522477Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?service_name=Twitch&start_date=04-2024&end_date=04-2025", "status":200,"error":""}
+{"time":"2025-07-18T20:16:12.013178678Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=04-2024&end_date=04-2025", "status":200,"error":""}
+{"time":"2025-07-18T20:16:40.669634662Z", "method":"PUT","uri":"/api/v1/subscriptions/1fcfece4-8db2-4a17-9b5c-bb6bc44caf4c", "status":204,"error":""}
+{"time":"2025-07-18T20:17:00.443751901Z", "method":"GET","uri":"/api/v1/subscriptions/1fcfece4-8db2-4a17-9b5c-bb6bc44caf4c", "status":200,"error":""}
+{"time":"2025-07-18T20:17:08.299658866Z", "method":"DELETE","uri":"/api/v1/subscriptions/1fcfece4-8db2-4a17-9b5c-bb6bc44caf4c", "status":204,"error":""}
+{"time":"2025-07-18T20:17:18.729568951Z", "method":"GET","uri":"/api/v1/subscriptions/1fcfece4-8db2-4a17-9b5c-bb6bc44caf4c", "status":404,"error":"code=404, message={subscription not found}"}
+{"time":"2025-07-18T20:18:51.785358224Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-18T20:18:51.843341362Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-18T20:18:51.847871197Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-18T20:18:51.848177242Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-18T20:18:52.190434079Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-18T20:18:52.202152328Z", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}

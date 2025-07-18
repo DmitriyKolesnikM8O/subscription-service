@@ -1,0 +1,260 @@
+basePath: /
+definitions:
+  entity.Subscription:
+    properties:
+      created_at:
+        type: string
+      end_date:
+        type: string
+      id:
+        type: string
+      price:
+        type: integer
+      service_name:
+        type: string
+      start_date:
+        type: string
+      user_id:
+        type: string
+    type: object
+  v1.CreateRequest:
+    properties:
+      price:
+        type: integer
+      service_name:
+        maxLength: 100
+        minLength: 2
+        type: string
+      start_date:
+        type: string
+      user_id:
+        type: string
+    required:
+    - price
+    - service_name
+    - start_date
+    - user_id
+    type: object
+  v1.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  v1.TotalCostResponse:
+    properties:
+      total:
+        type: integer
+    type: object
+  v1.UpdateRequest:
+    properties:
+      end_date:
+        type: string
+      price:
+        type: integer
+      service_name:
+        maxLength: 100
+        minLength: 2
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@example.com
+    name: API Support
+  description: REST-сервис для агрегирования данных о подписках пользователей
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Subscription Service API
+  version: "1.0"
+paths:
+  /api/v1/subscriptions:
+    get:
+      description: Возвращает все подписки указанного пользователя
+      parameters:
+      - description: ID пользователя
+        in: query
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Subscription'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+      summary: Список подписок пользователя
+      tags:
+      - Subscriptions
+    post:
+      consumes:
+      - application/json
+      description: Создает новую подписку пользователя
+      parameters:
+      - description: Данные подписки
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.CreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.Subscription'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+      summary: Создать подписку
+      tags:
+      - Subscriptions
+  /api/v1/subscriptions/{id}:
+    delete:
+      description: Удаляет подписку по её идентификатору
+      parameters:
+      - description: ID подписки
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+      summary: Удалить подписку
+      tags:
+      - Subscriptions
+    get:
+      description: Возвращает подписку по её идентификатору
+      parameters:
+      - description: ID подписки
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Subscription'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+      summary: Получить подписку по ID
+      tags:
+      - Subscriptions
+    put:
+      consumes:
+      - application/json
+      description: Обновляет данные существующей подписки
+      parameters:
+      - description: ID подписки
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Данные для обновления
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.UpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+      summary: Обновить подписку
+      tags:
+      - Subscriptions
+  /api/v1/subscriptions/total-cost:
+    get:
+      description: Возвращает суммарную стоимость подписок за период
+      parameters:
+      - description: ID пользователя
+        in: query
+        name: user_id
+        type: string
+      - description: Название сервиса
+        in: query
+        name: service_name
+        type: string
+      - description: Начало периода (MM-YYYY)
+        in: query
+        name: start_date
+        required: true
+        type: string
+      - description: Конец периода (MM-YYYY)
+        in: query
+        name: end_date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.TotalCostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+      summary: Расчет стоимости подписок
+      tags:
+      - Subscriptions
+schemes:
+- http
+swagger: "2.0"

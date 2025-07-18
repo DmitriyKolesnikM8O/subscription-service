@@ -19,6 +19,19 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  
+  app:
+    container_name: subscription-service
+    build: .
+    volumes:
+      - ./logs:/logs
+    env_file:
+      - .env
+    ports:
+      - "${HTTP_PORT}:${HTTP_PORT}"
+    depends_on:
+      - postgres
+    restart: unless-stopped
 
 volumes:
   db_data:
