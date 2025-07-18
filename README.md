@@ -33,7 +33,7 @@ git clone <repository-url>
 cd subscription-service
 ```
 
-2. Создайте файл `.env` в корне проекта:
+2. Создайте файл `.env` в корне проекта (для примера уже представлен):
 ```bash
 cp .env.example .env
 ```
