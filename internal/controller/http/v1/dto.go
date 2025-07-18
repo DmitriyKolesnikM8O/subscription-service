@@ -8,7 +8,7 @@ type CreateRequest struct {
 }
 
 type CalculateTotalCostRequest struct {
-	UserID      string `query:"user_id" validate:"required,uuid4"`
+	UserID      string `query:"user_id" validate:"omitempty,uuid4"`
 	ServiceName string `query:"service_name" validate:"omitempty,min=2,max=100"`
 	StartDate   string `query:"start_date" validate:"required,datetime=01-2006"`
 	EndDate     string `query:"end_date" validate:"required,datetime=01-2006"`

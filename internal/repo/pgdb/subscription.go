@@ -68,6 +68,7 @@ func (r *SubscriptionRepo) GetSubscriptionByID(ctx context.Context, id uuid.UUID
 		&sub.UserID,
 		&sub.StartDate,
 		&sub.EndDate,
+		&sub.CreatedAt,
 	)
 
 	if err != nil {

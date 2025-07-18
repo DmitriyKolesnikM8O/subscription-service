@@ -18,7 +18,6 @@ import (
 	"github.com/DmitriyKolesnikM8O/subscription-service/pkg/httpserver"
 	"github.com/DmitriyKolesnikM8O/subscription-service/pkg/logger"
 	"github.com/DmitriyKolesnikM8O/subscription-service/pkg/validator"
-	validator10 "github.com/go-playground/validator/v10"
 )
 
 func Run(configPath string) {
@@ -45,9 +44,7 @@ func Run(configPath string) {
 
 	log.Info("Initializing controllers")
 	handler := echo.New()
-
-	playgroundValidator := validator10.New()
-	handler.Validator = &validator.CustomValidator{V: playgroundValidator}
+	handler.Validator = validator.NewValidator()
 	v1.NewRouter(handler, services)
 
 	log.Info("Initializing HTTP-server")

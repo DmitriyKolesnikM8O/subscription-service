@@ -25,3 +25,73 @@
 {"time":"2025-07-17T23:45:45.678058044+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
 {"time":"2025-07-17T23:46:15.991906518+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
 {"time":"2025-07-18T11:08:52.136508734+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:14:39.065594304+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:14:40.11102445+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:15:19.243962361+03:00", "method":"GET","uri":"/health", "status":200,"error":""}
+{"time":"2025-07-18T11:17:35.489741348+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:17:50.311446828+03:00", "method":"GET","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T11:18:06.901896031+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost", "status":400,"error":""}
+{"time":"2025-07-18T11:18:26.304754074+03:00", "method":"DELETE","uri":"/api/v1/subscriptions/12", "status":400,"error":""}
+{"time":"2025-07-18T11:19:42.333342335+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:20:18.503613693+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:20:42.892433079+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:21:56.908072698+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:22:35.946215041+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:42:06.449154314+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T11:46:32.560259675+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T11:47:17.284632879+03:00", "method":"GET","uri":"/api/v1/subscriptions/60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:47:50.284633993+03:00", "method":"GET","uri":"/api/v1/subscriptions/60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:48:03.47001705+03:00", "method":"GET","uri":"/api/v1/subscriptions/:60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":400,"error":""}
+{"time":"2025-07-18T11:48:14.587637654+03:00", "method":"GET","uri":"/api/v1/subscriptions/60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:48:53.186696818+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T11:49:07.786570543+03:00", "method":"GET","uri":"/api/v1/subscriptions/380c53a0-d962-4e47-bbaf-6b96b0686dce", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T11:56:13.308072948+03:00", "method":"GET","uri":"/api/v1/subscriptions/380c53a0-d962-4e47-bbaf-6b96b0686dce", "status":200,"error":""}
+{"time":"2025-07-18T11:56:37.003311167+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T11:56:46.864034945+03:00", "method":"GET","uri":"/api/v1/69610288-3a14-40cb-b2dd-f47022f27482", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-18T11:57:21.02163039+03:00", "method":"GET","uri":"/api/v1/subscriptions/69610288-3a14-40cb-b2dd-f47022f27482", "status":200,"error":""}
+{"time":"2025-07-18T11:57:33.383832009+03:00", "method":"PUT","uri":"/api/v1/subscriptions/69610288-3a14-40cb-b2dd-f47022f27482", "status":204,"error":""}
+{"time":"2025-07-18T11:57:42.435779741+03:00", "method":"GET","uri":"/api/v1/subscriptions/69610288-3a14-40cb-b2dd-f47022f27482", "status":200,"error":""}
+{"time":"2025-07-18T11:59:16.072940878+03:00", "method":"DELETE","uri":"/api/v1/subscriptions/69610288-3a14-40cb-b2dd-f47022f27482", "status":204,"error":""}
+{"time":"2025-07-18T11:59:20.105161803+03:00", "method":"GET","uri":"/api/v1/subscriptions/69610288-3a14-40cb-b2dd-f47022f27482", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T12:00:48.478192932+03:00", "method":"GET","uri":"/api/v1/subscriptions/69610288-3a14-40cb-b2dd-f47022f27482", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T12:01:14.283509107+03:00", "method":"GET","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T12:01:37.533586628+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost", "status":400,"error":""}
+{"time":"2025-07-18T12:06:38.350517587+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost", "status":400,"error":""}
+{"time":"2025-07-18T12:06:46.436594448+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost", "status":400,"error":""}
+{"time":"2025-07-18T12:08:30.139952823+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost", "status":400,"error":""}
+{"time":"2025-07-18T12:08:51.24995947+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=4e598f13-efc3-44e2-9d8a-9a042f04ea71&start_date=07-2024&end_date=07-2025&service_name=Netflix", "status":200,"error":""}
+{"time":"2025-07-18T12:09:06.124771002+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T12:09:18.347255562+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T12:09:30.929520136+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T12:09:38.848700506+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T12:10:29.515646997+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T12:10:34.597767769+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T12:10:38.293874676+03:00", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-18T12:10:52.50932573+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025", "status":200,"error":""}
+{"time":"2025-07-18T12:11:20.773918992+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025&service_name=Yandex%20Plus", "status":200,"error":""}
+{"time":"2025-07-18T12:11:29.42360289+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025&service_name=Yandex%20Minus", "status":200,"error":""}
+{"time":"2025-07-18T12:16:58.648104849+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025&service_name=Yandex%20Minus", "status":200,"error":""}
+{"time":"2025-07-18T12:17:02.501459744+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2024&end_date=07-2025&service_name=Yandex%20Minus", "status":200,"error":""}
+{"time":"2025-07-18T12:17:12.910550423+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:17:15.362288074+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2024&end_date=07-2025", "status":200,"error":""}
+{"time":"2025-07-18T12:17:19.494540846+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:20:34.166074776+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:20:37.331678854+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:20:41.614988883+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025", "status":200,"error":""}
+{"time":"2025-07-18T12:20:45.927901277+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:20:49.775169296+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:21:54.405654168+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:23:18.514742115+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:23:43.717859129+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025", "status":200,"error":""}
+{"time":"2025-07-18T12:27:13.022555302+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025", "status":200,"error":""}
+{"time":"2025-07-18T12:27:17.381351252+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:27:20.731811646+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2024&end_date=07-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:27:27.85860248+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=07-2024&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:27:32.583961359+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2024&end_date=06-2024&service_name=Yandex%20minus", "status":400,"error":""}
+{"time":"2025-07-18T12:27:45.515482542+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=11-2024&end_date=12-2024&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:27:51.938534005+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=11-2025&end_date=12-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:30:41.422631545+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=11-2025&end_date=12-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:30:48.068767436+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=11-2023&end_date=12-2025&service_name=Yandex%20minus", "status":200,"error":""}
+{"time":"2025-07-18T12:30:52.740785807+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=11-2023&end_date=12-2025&service_name=Yandex%20Minus", "status":200,"error":""}
+{"time":"2025-07-18T12:30:57.656334011+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=11-2023&end_date=12-2025&service_name=Yandex%20Plus", "status":200,"error":""}
+{"time":"2025-07-18T12:31:00.683158649+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=11-2023&end_date=12-2025&service_name=Yandex%20Plus", "status":200,"error":""}

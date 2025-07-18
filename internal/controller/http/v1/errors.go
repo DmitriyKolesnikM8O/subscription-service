@@ -29,6 +29,8 @@ func HTTPError(err error) *echo.HTTPError {
 		return echo.NewHTTPError(http.StatusNotFound, ErrSubscriptionNotFound)
 	case "invalid request body":
 		return echo.NewHTTPError(http.StatusBadRequest, ErrBadRequest)
+	case "not found":
+		return echo.NewHTTPError(http.StatusNotFound, ErrSubscriptionNotFound)
 	default:
 		return echo.NewHTTPError(http.StatusInternalServerError, ErrInternalServer)
 	}

@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -57,6 +58,7 @@ func (c *SubscriptionController) Create(ctx echo.Context) error {
 		nil,
 	)
 	if err != nil {
+		fmt.Println("%w", err)
 		return HTTPError(err)
 	}
 
@@ -81,6 +83,7 @@ func (c *SubscriptionController) GetByID(ctx echo.Context) error {
 
 	sub, err := c.service.GetSubscriptionByID(ctx.Request().Context(), id)
 	if err != nil {
+		fmt.Println("%w", err)
 		return HTTPError(err)
 	}
 
@@ -200,32 +203,39 @@ func (c *SubscriptionController) ListByUser(ctx echo.Context) error {
 // @Failure 500 {object} ErrorResponse
 // @Router /api/v1/subscriptions/total-cost [get]
 func (c *SubscriptionController) CalculateTotalCost(ctx echo.Context) error {
-	var req CalculateTotalCostRequest
-	if err := ctx.Bind(&req); err != nil {
-		return ctx.JSON(http.StatusBadRequest, ErrBadRequest)
+
+	req := CalculateTotalCostRequest{
+		UserID:      ctx.QueryParam("user_id"),
+		ServiceName: ctx.QueryParam("service_name"),
+		StartDate:   ctx.QueryParam("start_date"),
+		EndDate:     ctx.QueryParam("end_date"),
 	}
 
 	if err := ctx.Validate(req); err != nil {
 		return ctx.JSON(http.StatusBadRequest, ValidationError(err))
 	}
 
-	userID, err := uuid.Parse(req.UserID)
-	if err != nil {
-		return ctx.JSON(http.StatusBadRequest, ErrInvalidUserID)
-	}
-
 	startDate, err := time.Parse("01-2006", req.StartDate)
 	if err != nil {
 		return ctx.JSON(http.StatusBadRequest, ErrInvalidDateFormat)
 	}
-
 	endDate, err := time.Parse("01-2006", req.EndDate)
 	if err != nil {
 		return ctx.JSON(http.StatusBadRequest, ErrInvalidDateFormat)
 	}
-
 	if startDate.After(endDate) {
 		return ctx.JSON(http.StatusBadRequest, ErrInvalidDateRange)
+	}
+
+	var userID uuid.UUID
+	if req.UserID != "" {
+		u, err := uuid.Parse(req.UserID)
+		if err != nil {
+			return ctx.JSON(http.StatusBadRequest, ErrInvalidUserID)
+		}
+		userID = u
+	} else {
+		userID = uuid.Nil
 	}
 
 	total, err := c.service.CalculateTotalCost(

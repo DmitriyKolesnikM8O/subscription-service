@@ -1,13 +1,19 @@
 package validator
 
 import (
-	play "github.com/go-playground/validator/v10"
+	"github.com/go-playground/validator/v10"
 )
 
-type CustomValidator struct {
-	V *play.Validate
+type Validator struct {
+	validator *validator.Validate
 }
 
-func (cv *CustomValidator) Validate(i interface{}) error {
-	return cv.V.Struct(i)
+func NewValidator() *Validator {
+	v := validator.New()
+
+	return &Validator{validator: v}
+}
+
+func (v *Validator) Validate(i interface{}) error {
+	return v.validator.Struct(i)
 }
