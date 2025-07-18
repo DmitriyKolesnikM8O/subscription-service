@@ -20,7 +20,7 @@ type Subscription interface {
 }
 
 type Report interface {
-	GetTotalCost(ctx context.Context, userID uuid.UUID, serviceName string, startDate, endDate time.Time) (int, error)
+	GetTotalCost(ctx context.Context, userID *uuid.UUID, serviceName *string, startDate, endDate time.Time) (int, error)
 }
 
 type Repositories struct {

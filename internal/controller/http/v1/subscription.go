@@ -203,7 +203,6 @@ func (c *SubscriptionController) ListByUser(ctx echo.Context) error {
 // @Failure 500 {object} ErrorResponse
 // @Router /api/v1/subscriptions/total-cost [get]
 func (c *SubscriptionController) CalculateTotalCost(ctx echo.Context) error {
-
 	req := CalculateTotalCostRequest{
 		UserID:      ctx.QueryParam("user_id"),
 		ServiceName: ctx.QueryParam("service_name"),
@@ -223,19 +222,14 @@ func (c *SubscriptionController) CalculateTotalCost(ctx echo.Context) error {
 	if err != nil {
 		return ctx.JSON(http.StatusBadRequest, ErrInvalidDateFormat)
 	}
-	if startDate.After(endDate) {
-		return ctx.JSON(http.StatusBadRequest, ErrInvalidDateRange)
-	}
 
-	var userID uuid.UUID
+	var userID *uuid.UUID
 	if req.UserID != "" {
-		u, err := uuid.Parse(req.UserID)
+		parsedUUID, err := uuid.Parse(req.UserID)
 		if err != nil {
 			return ctx.JSON(http.StatusBadRequest, ErrInvalidUserID)
 		}
-		userID = u
-	} else {
-		userID = uuid.Nil
+		userID = &parsedUUID
 	}
 
 	total, err := c.service.CalculateTotalCost(

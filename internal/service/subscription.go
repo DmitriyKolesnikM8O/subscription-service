@@ -143,17 +143,22 @@ func (s *subscriptionService) ListSubscriptionsByUser(
 
 func (s *subscriptionService) CalculateTotalCost(
 	ctx context.Context,
-	userID uuid.UUID,
-	serviceName string,
+	userID *uuid.UUID, // Меняем на указатель
+	serviceName string, // Оставляем строку (преобразуем в nil при пустом значении)
 	startDate, endDate time.Time,
 ) (int, error) {
 	if startDate.After(endDate) {
-		return 0, fmt.Errorf("SubscriptionService.CalculateTotalCost - invalid date range")
+		return 0, fmt.Errorf("invalid date range")
 	}
 
-	total, err := s.repos.Report.GetTotalCost(ctx, userID, serviceName, startDate, endDate)
+	var serviceNamePtr *string
+	if serviceName != "" {
+		serviceNamePtr = &serviceName
+	}
+
+	total, err := s.repos.Report.GetTotalCost(ctx, userID, serviceNamePtr, startDate, endDate)
 	if err != nil {
-		return 0, fmt.Errorf("SubscriptionService.CalculateTotalCost - repo error: %v", err)
+		return 0, fmt.Errorf("service error: %w", err)
 	}
 
 	return total, nil

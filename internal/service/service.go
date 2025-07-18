@@ -31,7 +31,7 @@ type SubscriptionService interface {
 	ListSubscriptionsByUser(ctx context.Context, userID uuid.UUID) ([]entity.Subscription, error)
 	CalculateTotalCost(
 		ctx context.Context,
-		userID uuid.UUID,
+		userID *uuid.UUID,
 		serviceName string,
 		startDate, endDate time.Time,
 	) (int, error)
