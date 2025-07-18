@@ -111,3 +111,7 @@
 {"time":"2025-07-18T12:56:29.170461316+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba&start_date=07-2025&end_date=09-2025", "status":200,"error":""}
 {"time":"2025-07-18T12:56:34.533828448+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2025&end_date=09-2025&service_name=Google", "status":200,"error":""}
 {"time":"2025-07-18T12:56:40.653898945+03:00", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=07-2025&end_date=09-2025", "status":200,"error":""}
+{"time":"2025-07-18T13:00:44.171396602+03:00", "method":"GET","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-18T13:01:11.164717118+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T13:01:34.635164128+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-18T13:02:30.810106747+03:00", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a5cba", "status":200,"error":""}

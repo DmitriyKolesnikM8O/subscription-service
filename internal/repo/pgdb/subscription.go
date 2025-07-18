@@ -154,6 +154,7 @@ func (r *SubscriptionRepo) ListSubscriptions(ctx context.Context, userID uuid.UU
 			&sub.UserID,
 			&sub.StartDate,
 			&sub.EndDate,
+			&sub.CreatedAt,
 		); err != nil {
 			return nil, fmt.Errorf("SubscriptionRepo.ListSubscriptions - row scan: %v", err)
 		}
