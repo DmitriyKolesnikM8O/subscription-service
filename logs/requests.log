@@ -195,3 +195,24 @@
 {"time":"2025-07-18T20:18:51.848177242Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
 {"time":"2025-07-18T20:18:52.190434079Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
 {"time":"2025-07-18T20:18:52.202152328Z", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2025-07-19T16:13:55.971843136Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-19T16:13:56.025443454Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-19T16:13:56.028053353Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-19T16:13:56.03360329Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-19T16:13:56.38697376Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-19T16:13:56.393142002Z", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2025-07-20T10:00:30.551511815Z", "method":"GET","uri":"/health", "status":200,"error":""}
+{"time":"2025-07-20T10:00:50.176375374Z", "method":"GET","uri":"/api/v1/subscriptions/3", "status":400,"error":""}
+{"time":"2025-07-20T10:00:52.693561717Z", "method":"GET","uri":"/api/v1/subscriptions/", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-20T10:00:53.709155076Z", "method":"GET","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-20T10:18:59.80896151Z", "method":"GET","uri":"/api/v1/subscriptions/", "status":404,"error":"code=404, message=Not Found"}
+{"time":"2025-07-20T12:36:45.046440237Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-20T12:36:45.105622866Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-20T12:36:45.121723608Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-20T12:36:45.122218569Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-20T12:36:45.411323234Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-24T10:41:18.140017298Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-24T10:41:18.205523192Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-24T10:41:18.21014012Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-24T10:41:18.210734737Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-24T10:41:18.63583678Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
