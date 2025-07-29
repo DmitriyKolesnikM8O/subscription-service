@@ -1,10 +1,14 @@
 package v1
 
+type CreateServiceRequest struct {
+	Name string `json:"name" validate:"required,min=2,max=100"`
+	Price int `json:"price" validate:"required,gt=0"`
+}
+
 type CreateRequest struct {
-	ServiceName string `json:"service_name" validate:"required,min=2,max=100"`
-	Price       int    `json:"price" validate:"required,gt=0"`
-	UserID      string `json:"user_id" validate:"required,uuid4"`
-	StartDate   string `json:"start_date" validate:"required,datetime=01-2006"`
+	Service   CreateServiceRequest `json:"service" validate:"required"`
+	UserID    string               `json:"user_id" validate:"required,uuid4"`
+	StartDate string               `json:"start_date" validate:"required,datetime=01-2006"`
 }
 
 type CalculateTotalCostRequest struct {
@@ -14,10 +18,14 @@ type CalculateTotalCostRequest struct {
 	EndDate     string `query:"end_date" validate:"required,datetime=01-2006"`
 }
 
+type UpdateServiceRequest struct {
+	Name string `json:"name" validate:"omitempty,min=2,max=100"`
+	Price int `json:"price" validate:"omitempty,gt=0"`
+}
+
 type UpdateRequest struct {
-	ServiceName string `json:"service_name" validate:"omitempty,min=2,max=100"`
-	Price       int    `json:"price" validate:"omitempty,gt=0"`
-	EndDate     string `json:"end_date" validate:"omitempty,datetime=01-2006"`
+	Service   UpdateServiceRequest `json:"service" validate:"required"`
+	EndDate   string               `json:"end_date" validate:"omitempty,datetime=01-2006"`
 }
 
 // type ErrorResponse struct {

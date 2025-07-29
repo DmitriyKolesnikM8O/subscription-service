@@ -7,6 +7,7 @@ import (
 	"github.com/DmitriyKolesnikM8O/subscription-service/internal/service"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
+	"github.com/DmitriyKolesnikM8O/subscription-service/internal/entity"
 )
 
 type SubscriptionController struct {
@@ -48,13 +49,18 @@ func (c *SubscriptionController) Create(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, ErrInvalidUserID)
 	}
 
-	sub, err := c.service.CreateSubscription(
+	sub := entity.Subscription{
+		Service: entity.Service{
+			Name:  req.Service.Name,
+			Price: req.Service.Price,
+		},
+		UserID:    userID,
+		StartDate: startDate,
+	}
+
+	sub, err = c.service.CreateSubscription(
 		ctx.Request().Context(),
-		req.ServiceName,
-		req.Price,
-		userID,
-		startDate,
-		nil,
+		sub,
 	)
 	if err != nil {
 		return HTTPError(err)
@@ -124,12 +130,18 @@ func (c *SubscriptionController) Update(ctx echo.Context) error {
 		endDate = &parsedDate
 	}
 
+	sub := entity.Subscription{
+		Service: entity.Service{
+			Name:  req.Service.Name,
+			Price: req.Service.Price,
+		},
+		EndDate: endDate,
+	}
+
 	err = c.service.UpdateSubscription(
 		ctx.Request().Context(),
 		id,
-		req.ServiceName,
-		req.Price,
-		endDate,
+		sub,
 	)
 	if err != nil {
 		return HTTPError(err)
@@ -229,10 +241,15 @@ func (c *SubscriptionController) CalculateTotalCost(ctx echo.Context) error {
 		userID = &parsedUUID
 	}
 
+	var serviceName *string
+	if req.ServiceName != "" {
+		serviceName = &req.ServiceName
+	}
+
 	total, err := c.service.CalculateTotalCost(
 		ctx.Request().Context(),
 		userID,
-		req.ServiceName,
+		serviceName,
 		startDate,
 		endDate,
 	)

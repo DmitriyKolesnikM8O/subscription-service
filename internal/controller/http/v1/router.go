@@ -45,7 +45,7 @@ func SetupSubscriptionRoutes(group *echo.Group, subService service.SubscriptionS
 func setLogsFile() *os.File {
 	err := os.MkdirAll("logs", 0755)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	file, err := os.OpenFile("logs/requests.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 	if err != nil {

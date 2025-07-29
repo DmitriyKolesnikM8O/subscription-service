@@ -29,17 +29,18 @@ func (r *ReportRepo) GetTotalCost(
 	startDate, endDate time.Time,
 ) (int, error) {
 	qb := r.psql.
-		Select("COALESCE(SUM(price), 0)").
-		From("subscriptions").
-		Where("start_date >= ?", startDate).
-		Where("(end_date IS NULL OR end_date <= ?)", endDate)
+		Select("COALESCE(SUM(svc.price), 0)").
+		From("subscriptions s").
+		Join("services svc ON s.service_id = svc.id").
+		Where("s.start_date >= ?", startDate).
+		Where("(s.end_date IS NULL OR s.end_date <= ?)", endDate)
 
 	if userID != nil {
-		qb = qb.Where("user_id = ?", *userID)
+		qb = qb.Where("s.user_id = ?", *userID)
 	}
 
 	if serviceName != nil {
-		qb = qb.Where("service_name = ?", *serviceName)
+		qb = qb.Where("svc.name = ?", *serviceName)
 	}
 
 	sql, args, err := qb.ToSql()

@@ -22,33 +22,20 @@ func NewSubscriptionService(repos *repo.Repositories) SubscriptionService {
 
 func (s *subscriptionService) CreateSubscription(
 	ctx context.Context,
-	serviceName string,
-	price int,
-	userID uuid.UUID,
-	startDate time.Time,
-	endDate *time.Time,
+	sub entity.Subscription,
 ) (*entity.Subscription, error) {
 
-	if serviceName == "" {
+	if sub.Service.Name == "" {
 		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - empty service name")
 	}
-	if price <= 0 {
+	if sub.Service.Price <= 0 {
 		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - price must be positive")
 	}
-	if startDate.IsZero() {
-		startDate = time.Now().UTC()
+	if sub.StartDate.IsZero() {
+		sub.StartDate = time.Now().UTC()
 	}
-	if endDate != nil && endDate.Before(startDate) {
+	if sub.EndDate != nil && sub.EndDate.Before(sub.StartDate) {
 		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - end date before start date")
-	}
-
-	sub := entity.Subscription{
-		ID:          uuid.New(),
-		ServiceName: serviceName,
-		Price:       price,
-		UserID:      userID,
-		StartDate:   startDate,
-		EndDate:     endDate,
 	}
 
 	id, err := s.repos.Subscription.CreateSubscription(ctx, sub)
@@ -80,14 +67,12 @@ func (s *subscriptionService) GetSubscriptionByID(
 func (s *subscriptionService) UpdateSubscription(
 	ctx context.Context,
 	id uuid.UUID,
-	serviceName string,
-	price int,
-	endDate *time.Time,
+	sub entity.Subscription,
 ) error {
-	if serviceName == "" {
+	if sub.Service.Name == "" {
 		return fmt.Errorf("SubscriptionService.UpdateSubscription - empty service name")
 	}
-	if price <= 0 {
+	if sub.Service.Price <= 0 {
 		return fmt.Errorf("SubscriptionService.UpdateSubscription - price must be positive")
 	}
 
@@ -99,13 +84,13 @@ func (s *subscriptionService) UpdateSubscription(
 		return fmt.Errorf("SubscriptionService.UpdateSubscription - get sub error: %v", err)
 	}
 
-	if endDate != nil && endDate.Before(current.StartDate) {
+	if sub.EndDate != nil && sub.EndDate.Before(current.StartDate) {
 		return fmt.Errorf("SubscriptionService.UpdateSubscription - end date before start date")
 	}
 
-	current.ServiceName = serviceName
-	current.Price = price
-	current.EndDate = endDate
+	current.Service.Name = sub.Service.Name
+	current.Service.Price = sub.Service.Price
+	current.EndDate = sub.EndDate
 
 	if err := s.repos.Subscription.UpdateSubscription(ctx, current); err != nil {
 		if errors.Is(err, repoerrs.ErrNotFound) {
@@ -144,19 +129,14 @@ func (s *subscriptionService) ListSubscriptionsByUser(
 func (s *subscriptionService) CalculateTotalCost(
 	ctx context.Context,
 	userID *uuid.UUID, // Меняем на указатель
-	serviceName string, // Оставляем строку (преобразуем в nil при пустом значении)
+	serviceName *string, // Теперь это указатель на строку
 	startDate, endDate time.Time,
 ) (int, error) {
 	if startDate.After(endDate) {
 		return 0, fmt.Errorf("invalid date range")
 	}
 
-	var serviceNamePtr *string
-	if serviceName != "" {
-		serviceNamePtr = &serviceName
-	}
-
-	total, err := s.repos.Report.GetTotalCost(ctx, userID, serviceNamePtr, startDate, endDate)
+	total, err := s.repos.Report.GetTotalCost(ctx, userID, serviceName, startDate, endDate)
 	if err != nil {
 		return 0, fmt.Errorf("service error: %w", err)
 	}

@@ -48,9 +48,14 @@ func Run(configPath string) {
 	log.Info("Connect to BD")
 	pool, err := postgres.NewClient(context.Background(), cfg.Storage, 3)
 	if err != nil {
-		log.Fatal(fmt.Errorf("Error when connecting DB: %w", err))
+		log.Fatalf("Error when connecting DB: %v", err)
 	}
-	defer pool.Close()
+	defer func() {
+		err := pool.Close()
+		if err != nil {
+			log.Errorf("Error closing DB connection pool: %v", err)
+		}
+	}()
 
 	log.Info("Initializing repositories")
 	repositories := repo.NewRepositories(pool)

@@ -12,27 +12,21 @@ import (
 type SubscriptionService interface {
 	CreateSubscription(
 		ctx context.Context,
-		serviceName string,
-		price int,
-		userID uuid.UUID,
-		startDate time.Time,
-		endDate *time.Time,
+		sub entity.Subscription,
 	) (*entity.Subscription, error)
 
 	GetSubscriptionByID(ctx context.Context, id uuid.UUID) (*entity.Subscription, error)
 	UpdateSubscription(
 		ctx context.Context,
 		id uuid.UUID,
-		serviceName string,
-		price int,
-		endDate *time.Time,
+		sub entity.Subscription,
 	) error
 	DeleteSubscription(ctx context.Context, id uuid.UUID) error
 	ListSubscriptionsByUser(ctx context.Context, userID uuid.UUID) ([]entity.Subscription, error)
 	CalculateTotalCost(
 		ctx context.Context,
 		userID *uuid.UUID,
-		serviceName string,
+		serviceName *string,
 		startDate, endDate time.Time,
 	) (int, error)
 }

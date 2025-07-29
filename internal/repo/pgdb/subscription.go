@@ -27,14 +27,39 @@ func NewSubscriptionRepo(pg *pgxpool.Pool) *SubscriptionRepo {
 }
 
 func (r *SubscriptionRepo) CreateSubscription(ctx context.Context, sub entity.Subscription) (uuid.UUID, error) {
+	// First, try to find an existing service with the same name and price.
+	// If not found, create a new service.
+	var serviceID uuid.UUID
+	err := r.pool.QueryRow(ctx, "SELECT id FROM services WHERE name = $1 AND price = $2", sub.Service.Name, sub.Service.Price).Scan(&serviceID)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			// Service not found, create a new one
+			sql, args, err := r.psql.
+				Insert("services").
+				Columns("name", "price").
+				Values(sub.Service.Name, sub.Service.Price).
+				Suffix("RETURNING id").
+				ToSql()
+			if err != nil {
+				return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service sql build: %v", err)
+			}
+			err = r.pool.QueryRow(ctx, sql, args...).Scan(&serviceID)
+			if err != nil {
+				return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service query exec: %v", err)
+			}
+		} else {
+			return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service query: %v", err)
+		}
+	}
+
 	sql, args, err := r.psql.
 		Insert("subscriptions").
-		Columns("service_name", "price", "user_id", "start_date", "end_date").
-		Values(sub.ServiceName, sub.Price, sub.UserID, sub.StartDate, sub.EndDate).
+		Columns("service_id", "user_id", "start_date", "end_date").
+		Values(serviceID, sub.UserID, sub.StartDate, sub.EndDate).
 		Suffix("RETURNING id").
 		ToSql()
 	if err != nil {
-		return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - sql build: %v", err)
+		return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - subscription sql build: %v", err)
 	}
 
 	var id uuid.UUID
@@ -44,7 +69,7 @@ func (r *SubscriptionRepo) CreateSubscription(ctx context.Context, sub entity.Su
 		if errors.As(err, &pgErr) && pgErr.Code == "23505" {
 			return uuid.Nil, repoerrs.ErrAlreadyExists
 		}
-		return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - query exec: %v", err)
+		return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - subscription query exec: %v", err)
 	}
 
 	return id, nil
@@ -52,9 +77,10 @@ func (r *SubscriptionRepo) CreateSubscription(ctx context.Context, sub entity.Su
 
 func (r *SubscriptionRepo) GetSubscriptionByID(ctx context.Context, id uuid.UUID) (entity.Subscription, error) {
 	sql, args, err := r.psql.
-		Select("*").
-		From("subscriptions").
-		Where("id = ?", id).
+		Select("s.id", "s.user_id", "s.start_date", "s.end_date", "s.created_at", "svc.id", "svc.name", "svc.price").
+		From("subscriptions s").
+		Join("services svc ON s.service_id = svc.id").
+		Where("s.id = ?", id).
 		ToSql()
 	if err != nil {
 		return entity.Subscription{}, fmt.Errorf("SubscriptionRepo.GetSubscriptionByID - sql build: %v", err)
@@ -63,12 +89,13 @@ func (r *SubscriptionRepo) GetSubscriptionByID(ctx context.Context, id uuid.UUID
 	var sub entity.Subscription
 	err = r.pool.QueryRow(ctx, sql, args...).Scan(
 		&sub.ID,
-		&sub.ServiceName,
-		&sub.Price,
 		&sub.UserID,
 		&sub.StartDate,
 		&sub.EndDate,
 		&sub.CreatedAt,
+		&sub.Service.ID,
+		&sub.Service.Name,
+		&sub.Service.Price,
 	)
 
 	if err != nil {
@@ -82,10 +109,35 @@ func (r *SubscriptionRepo) GetSubscriptionByID(ctx context.Context, id uuid.UUID
 }
 
 func (r *SubscriptionRepo) UpdateSubscription(ctx context.Context, sub entity.Subscription) error {
+	// First, try to find an existing service with the same name and price.
+	// If not found, create a new service.
+	var serviceID uuid.UUID
+	err := r.pool.QueryRow(ctx, "SELECT id FROM services WHERE name = $1 AND price = $2", sub.Service.Name, sub.Service.Price).Scan(&serviceID)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			// Service not found, create a new one
+			sql, args, err := r.psql.
+				Insert("services").
+				Columns("name", "price").
+				Values(sub.Service.Name, sub.Service.Price).
+				Suffix("RETURNING id").
+				ToSql()
+			if err != nil {
+				return fmt.Errorf("SubscriptionRepo.UpdateSubscription - service sql build: %v", err)
+			}
+			err = r.pool.QueryRow(ctx, sql, args...).Scan(&serviceID)
+			if err != nil {
+				return fmt.Errorf("SubscriptionRepo.UpdateSubscription - service query exec: %v", err)
+			}
+		} else {
+			return fmt.Errorf("SubscriptionRepo.UpdateSubscription - service query: %v", err)
+		}
+	}
+
 	sql, args, err := r.psql.
 		Update("subscriptions").
-		Set("service_name", sub.ServiceName).
-		Set("price", sub.Price).
+		Set("service_id", serviceID).
+		Set("user_id", sub.UserID).
 		Set("start_date", sub.StartDate).
 		Set("end_date", sub.EndDate).
 		Where("id = ?", sub.ID).
@@ -129,10 +181,11 @@ func (r *SubscriptionRepo) DeleteSubscription(ctx context.Context, id uuid.UUID)
 
 func (r *SubscriptionRepo) ListSubscriptions(ctx context.Context, userID uuid.UUID) ([]entity.Subscription, error) {
 	sql, args, err := r.psql.
-		Select("*").
-		From("subscriptions").
-		Where("user_id = ?", userID).
-		OrderBy("start_date DESC").
+		Select("s.id", "s.user_id", "s.start_date", "s.end_date", "s.created_at", "svc.id", "svc.name", "svc.price").
+		From("subscriptions s").
+		Join("services svc ON s.service_id = svc.id").
+		Where("s.user_id = ?", userID).
+		OrderBy("s.start_date DESC").
 		ToSql()
 	if err != nil {
 		return nil, fmt.Errorf("SubscriptionRepo.ListSubscriptions - sql build: %v", err)
@@ -149,12 +202,13 @@ func (r *SubscriptionRepo) ListSubscriptions(ctx context.Context, userID uuid.UU
 		var sub entity.Subscription
 		if err := rows.Scan(
 			&sub.ID,
-			&sub.ServiceName,
-			&sub.Price,
 			&sub.UserID,
 			&sub.StartDate,
 			&sub.EndDate,
 			&sub.CreatedAt,
+			&sub.Service.ID,
+			&sub.Service.Name,
+			&sub.Service.Price,
 		); err != nil {
 			return nil, fmt.Errorf("SubscriptionRepo.ListSubscriptions - row scan: %v", err)
 		}
