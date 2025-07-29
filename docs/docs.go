@@ -66,7 +66,7 @@ const docTemplate = `{
                 }
             },
             "post": {
-                "description": "Создает новую подписку пользователя",
+                "description": "Создает новую подписку пользователя. Если сервис с указанным service_id не существует, возвращается ошибка.",
                 "consumes": [
                     "application/json"
                 ],
@@ -97,6 +97,12 @@ const docTemplate = `{
                     },
                     "400": {
                         "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/v1.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Если сервис с указанным service_id не найден",
                         "schema": {
                             "$ref": "#/definitions/v1.ErrorResponse"
                         }
@@ -306,6 +312,20 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "entity.Service": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                }
+            }
+        },
         "entity.Subscription": {
             "type": "object",
             "properties": {
@@ -318,11 +338,13 @@ const docTemplate = `{
                 "id": {
                     "type": "string"
                 },
-                "price": {
-                    "type": "integer"
-                },
-                "service_name": {
-                    "type": "string"
+                "service": {
+                    "description": "Embedded service details",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/entity.Service"
+                        }
+                    ]
                 },
                 "start_date": {
                     "type": "string"
@@ -335,25 +357,36 @@ const docTemplate = `{
         "v1.CreateRequest": {
             "type": "object",
             "required": [
-                "price",
-                "service_name",
+                "service",
                 "start_date",
                 "user_id"
             ],
             "properties": {
-                "price": {
-                    "type": "integer"
-                },
-                "service_name": {
-                    "type": "string",
-                    "maxLength": 100,
-                    "minLength": 2
+                "service": {
+                    "$ref": "#/definitions/v1.CreateServiceRequest"
                 },
                 "start_date": {
                     "type": "string"
                 },
                 "user_id": {
                     "type": "string"
+                }
+            }
+        },
+        "v1.CreateServiceRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "price"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
+                },
+                "price": {
+                    "type": "integer"
                 }
             }
         },
@@ -375,17 +408,28 @@ const docTemplate = `{
         },
         "v1.UpdateRequest": {
             "type": "object",
+            "required": [
+                "service"
+            ],
             "properties": {
                 "end_date": {
                     "type": "string"
                 },
-                "price": {
-                    "type": "integer"
-                },
-                "service_name": {
+                "service": {
+                    "$ref": "#/definitions/v1.UpdateServiceRequest"
+                }
+            }
+        },
+        "v1.UpdateServiceRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
                     "type": "string",
                     "maxLength": 100,
                     "minLength": 2
+                },
+                "price": {
+                    "type": "integer"
                 }
             }
         }

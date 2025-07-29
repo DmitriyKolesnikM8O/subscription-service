@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -21,13 +20,14 @@ func NewSubscriptionController(s service.SubscriptionService) *SubscriptionContr
 
 // Create godoc
 // @Summary Создать подписку
-// @Description Создает новую подписку пользователя
+// @Description Создает новую подписку пользователя. Если сервис с указанным service_id не существует, возвращается ошибка.
 // @Tags Subscriptions
 // @Accept json
 // @Produce json
 // @Param request body CreateRequest true "Данные подписки"
 // @Success 201 {object} entity.Subscription
 // @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse "Если сервис с указанным service_id не найден"
 // @Failure 500 {object} ErrorResponse
 // @Router /api/v1/subscriptions [post]
 func (c *SubscriptionController) Create(ctx echo.Context) error {
@@ -64,7 +64,6 @@ func (c *SubscriptionController) Create(ctx echo.Context) error {
 		*sub,
 	)
 	if err != nil {
-		fmt.Println(err)
 		return HTTPError(err)
 	}
 

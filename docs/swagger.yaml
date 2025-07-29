@@ -1,5 +1,14 @@
 basePath: /
 definitions:
+  entity.Service:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+    type: object
   entity.Subscription:
     properties:
       created_at:
@@ -8,10 +17,10 @@ definitions:
         type: string
       id:
         type: string
-      price:
-        type: integer
-      service_name:
-        type: string
+      service:
+        allOf:
+        - $ref: '#/definitions/entity.Service'
+        description: Embedded service details
       start_date:
         type: string
       user_id:
@@ -19,21 +28,28 @@ definitions:
     type: object
   v1.CreateRequest:
     properties:
-      price:
-        type: integer
-      service_name:
-        maxLength: 100
-        minLength: 2
-        type: string
+      service:
+        $ref: '#/definitions/v1.CreateServiceRequest'
       start_date:
         type: string
       user_id:
         type: string
     required:
-    - price
-    - service_name
+    - service
     - start_date
     - user_id
+    type: object
+  v1.CreateServiceRequest:
+    properties:
+      name:
+        maxLength: 100
+        minLength: 2
+        type: string
+      price:
+        type: integer
+    required:
+    - name
+    - price
     type: object
   v1.ErrorResponse:
     properties:
@@ -49,12 +65,19 @@ definitions:
     properties:
       end_date:
         type: string
-      price:
-        type: integer
-      service_name:
+      service:
+        $ref: '#/definitions/v1.UpdateServiceRequest'
+    required:
+    - service
+    type: object
+  v1.UpdateServiceRequest:
+    properties:
+      name:
         maxLength: 100
         minLength: 2
         type: string
+      price:
+        type: integer
     type: object
 host: localhost:8080
 info:
@@ -100,7 +123,8 @@ paths:
     post:
       consumes:
       - application/json
-      description: Создает новую подписку пользователя
+      description: Создает новую подписку пользователя. Если сервис с указанным service_id
+        не существует, возвращается ошибка.
       parameters:
       - description: Данные подписки
         in: body
@@ -117,6 +141,10 @@ paths:
             $ref: '#/definitions/entity.Subscription'
         "400":
           description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.ErrorResponse'
+        "404":
+          description: Если сервис с указанным service_id не найден
           schema:
             $ref: '#/definitions/v1.ErrorResponse'
         "500":

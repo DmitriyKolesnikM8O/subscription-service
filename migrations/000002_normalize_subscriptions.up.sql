@@ -1,6 +1,6 @@
 CREATE TABLE services (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    name TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
     price INTEGER NOT NULL CHECK (price > 0)
 );
 

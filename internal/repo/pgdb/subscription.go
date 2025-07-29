@@ -26,14 +26,11 @@ func NewSubscriptionRepo(pg *pgxpool.Pool) *SubscriptionRepo {
 	}
 }
 
-func (r *SubscriptionRepo) CreateSubscription(ctx context.Context, sub entity.Subscription) (uuid.UUID, error) {
-	// First, try to find an existing service with the same name and price.
-	// If not found, create a new service.
+func (r *SubscriptionRepo) CreateSubscription(ctx context.Context, sub entity.Subscription) (*entity.Subscription, error) {
 	var serviceID uuid.UUID
 	err := r.pool.QueryRow(ctx, "SELECT id FROM services WHERE name = $1 AND price = $2", sub.Service.Name, sub.Service.Price).Scan(&serviceID)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
-			// Service not found, create a new one
 			sql, args, err := r.psql.
 				Insert("services").
 				Columns("name", "price").
@@ -41,40 +38,40 @@ func (r *SubscriptionRepo) CreateSubscription(ctx context.Context, sub entity.Su
 				Suffix("RETURNING id").
 				ToSql()
 			if err != nil {
-				return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service sql build: %v", err)
+				return nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service sql build: %v", err)
 			}
 			err = r.pool.QueryRow(ctx, sql, args...).Scan(&serviceID)
 			if err != nil {
-				return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service query exec: %v", err)
+				return nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service query exec: %v", err)
 			}
 		} else {
-			return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service query: %v", err)
+			return nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - service query: %v", err)
 		}
 	}
+
+	sub.Service.ID = serviceID
 
 	sql, args, err := r.psql.
 		Insert("subscriptions").
-		Columns("service_id", "user_id", "start_date", "end_date").
-		Values(serviceID, sub.UserID, sub.StartDate, sub.EndDate).
-		Suffix("RETURNING id").
+		Columns("id", "service_id", "user_id", "start_date", "end_date", "created_at").
+		Values(uuid.New(), serviceID, sub.UserID, sub.StartDate, sub.EndDate, "NOW()").
+		Suffix("RETURNING id, created_at").
 		ToSql()
 	if err != nil {
-		return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - subscription sql build: %v", err)
+		return nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - subscription sql build: %v", err)
 	}
 
-	var id uuid.UUID
-	err = r.pool.QueryRow(ctx, sql, args...).Scan(&id)
+	err = r.pool.QueryRow(ctx, sql, args...).Scan(&sub.ID, &sub.CreatedAt)
 	if err != nil {
 		var pgErr *pgconn.PgError
 		if errors.As(err, &pgErr) && pgErr.Code == "23505" {
-			return uuid.Nil, repoerrs.ErrAlreadyExists
+			return nil, repoerrs.ErrAlreadyExists
 		}
-		return uuid.Nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - subscription query exec: %v", err)
+		return nil, fmt.Errorf("SubscriptionRepo.CreateSubscription - subscription query exec: %v", err)
 	}
 
-	return id, nil
+	return &sub, nil
 }
-
 func (r *SubscriptionRepo) GetSubscriptionByID(ctx context.Context, id uuid.UUID) (entity.Subscription, error) {
 	sql, args, err := r.psql.
 		Select("s.id", "s.user_id", "s.start_date", "s.end_date", "s.created_at", "svc.id", "svc.name", "svc.price").

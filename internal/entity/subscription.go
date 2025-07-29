@@ -14,8 +14,7 @@ type Service struct {
 
 type Subscription struct {
 	ID        uuid.UUID  `json:"id"`
-	ServiceID uuid.UUID  `json:"service_id"`
-	Service   Service    `json:"service"` // Embedded service details
+	Service   Service    `json:"service"`
 	UserID    uuid.UUID  `json:"user_id"`
 	StartDate time.Time  `json:"start_date"`
 	EndDate   *time.Time `json:"end_date,omitempty"`

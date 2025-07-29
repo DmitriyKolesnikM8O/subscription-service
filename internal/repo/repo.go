@@ -12,7 +12,7 @@ import (
 )
 
 type Subscription interface {
-	CreateSubscription(ctx context.Context, sub entity.Subscription) (uuid.UUID, error)
+	CreateSubscription(ctx context.Context, sub entity.Subscription) (*entity.Subscription, error)
 	GetSubscriptionByID(ctx context.Context, id uuid.UUID) (entity.Subscription, error)
 	UpdateSubscription(ctx context.Context, sub entity.Subscription) error
 	DeleteSubscription(ctx context.Context, id uuid.UUID) error

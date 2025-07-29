@@ -24,7 +24,6 @@ func (s *subscriptionService) CreateSubscription(
 	ctx context.Context,
 	sub entity.Subscription,
 ) (*entity.Subscription, error) {
-
 	if sub.Service.Name == "" {
 		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - empty service name")
 	}
@@ -38,7 +37,7 @@ func (s *subscriptionService) CreateSubscription(
 		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - end date before start date")
 	}
 
-	id, err := s.repos.Subscription.CreateSubscription(ctx, sub)
+	createdSub, err := s.repos.Subscription.CreateSubscription(ctx, sub)
 	if err != nil {
 		if errors.Is(err, repoerrs.ErrAlreadyExists) {
 			return nil, fmt.Errorf("SubscriptionService.CreateSubscription - %w", err)
@@ -46,8 +45,7 @@ func (s *subscriptionService) CreateSubscription(
 		return nil, fmt.Errorf("SubscriptionService.CreateSubscription - repo error: %v", err)
 	}
 
-	sub.ID = id
-	return &sub, nil
+	return createdSub, nil
 }
 
 func (s *subscriptionService) GetSubscriptionByID(
