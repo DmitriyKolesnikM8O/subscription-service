@@ -51,10 +51,8 @@ func Run(configPath string) {
 		log.Fatalf("Error when connecting DB: %v", err)
 	}
 	defer func() {
-		err := pool.Close()
-		if err != nil {
-			log.Errorf("Error closing DB connection pool: %v", err)
-		}
+		pool.Close()
+
 	}()
 
 	log.Info("Initializing repositories")

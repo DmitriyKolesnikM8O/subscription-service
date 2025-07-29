@@ -216,3 +216,18 @@
 {"time":"2025-07-24T10:41:18.21014012Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
 {"time":"2025-07-24T10:41:18.210734737Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
 {"time":"2025-07-24T10:41:18.63583678Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-29T14:34:03.008975739Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-29T14:34:03.068290718Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-29T14:34:03.0702812Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-29T14:34:03.071346232Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-29T14:34:03.530956589Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-29T14:34:03.696778296Z", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2025-07-29T14:39:59.983160404Z", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-29T14:41:19.562902486Z", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-29T14:42:36.064041416Z", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-29T14:42:44.023312359Z", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-29T14:42:56.872993498Z", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-29T14:45:18.321329509Z", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-29T14:45:50.224279146Z", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-29T14:46:34.847924716Z", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-29T14:47:37.930619007Z", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}

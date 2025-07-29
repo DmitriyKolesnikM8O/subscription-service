@@ -1,13 +1,14 @@
 package v1
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
+	"github.com/DmitriyKolesnikM8O/subscription-service/internal/entity"
 	"github.com/DmitriyKolesnikM8O/subscription-service/internal/service"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
-	"github.com/DmitriyKolesnikM8O/subscription-service/internal/entity"
 )
 
 type SubscriptionController struct {
@@ -49,7 +50,7 @@ func (c *SubscriptionController) Create(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, ErrInvalidUserID)
 	}
 
-	sub := entity.Subscription{
+	sub := &entity.Subscription{
 		Service: entity.Service{
 			Name:  req.Service.Name,
 			Price: req.Service.Price,
@@ -60,9 +61,10 @@ func (c *SubscriptionController) Create(ctx echo.Context) error {
 
 	sub, err = c.service.CreateSubscription(
 		ctx.Request().Context(),
-		sub,
+		*sub,
 	)
 	if err != nil {
+		fmt.Println(err)
 		return HTTPError(err)
 	}
 
