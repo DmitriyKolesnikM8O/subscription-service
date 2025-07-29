@@ -231,3 +231,12 @@
 {"time":"2025-07-29T14:45:50.224279146Z", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
 {"time":"2025-07-29T14:46:34.847924716Z", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
 {"time":"2025-07-29T14:47:37.930619007Z", "method":"POST","uri":"/api/v1/subscriptions", "status":500,"error":"code=500, message={internal server error}"}
+{"time":"2025-07-29T16:42:51.982049608Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-29T16:42:52.054628079Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-29T16:42:52.059775341Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-29T16:42:52.06728926Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-29T16:42:52.516338941Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-29T16:43:17.190848004Z", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-29T16:43:53.253964153Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":200,"error":""}
+{"time":"2025-07-29T16:44:12.461639763Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=05-2025&end_date=09-2025", "status":200,"error":""}
+{"time":"2025-07-29T16:44:32.167254761Z", "method":"GET","uri":"/api/v1/subscriptions/3cfc72b8-52c2-4414-b6a2-23b401488b2b", "status":200,"error":""}
