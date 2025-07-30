@@ -116,13 +116,28 @@ func (s *subscriptionService) DeleteSubscription(
 func (s *subscriptionService) ListSubscriptionsByUser(
 	ctx context.Context,
 	userID uuid.UUID,
-) ([]entity.Subscription, error) {
-	subs, err := s.repos.Subscription.ListSubscriptions(ctx, userID)
+	page int,
+	limit int,
+) ([]entity.Subscription, int, error) {
+
+	offset := (page - 1) * limit
+	subs, err := s.repos.Subscription.ListSubscriptions(ctx, userID, offset, limit)
 	if err != nil {
-		return nil, fmt.Errorf("SubscriptionService.ListSubscriptionsByUser - repo error: %v", err)
+		return nil, 0, fmt.Errorf("SubscriptionService.ListSubscriptionsByUser - repo error: %v", err)
 	}
-	return subs, nil
+	total, err := s.repos.Subscription.GetTotalByUser(ctx, userID)
+	if err != nil {
+		return nil, 0, fmt.Errorf("SubscriptionService.ListSubscriptionsByUser - failed to get total: %v", err)
+	}
+	return subs, total, nil
 }
+
+// 	subs, err := s.repos.Subscription.ListSubscriptions(ctx, userID)
+// 	if err != nil {
+// 		return nil, fmt.Errorf("SubscriptionService.ListSubscriptionsByUser - repo error: %v", err)
+// 	}
+// 	return subs, nil
+// }
 
 func (s *subscriptionService) CalculateTotalCost(
 	ctx context.Context,

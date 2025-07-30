@@ -16,7 +16,8 @@ type Subscription interface {
 	GetSubscriptionByID(ctx context.Context, id uuid.UUID) (entity.Subscription, error)
 	UpdateSubscription(ctx context.Context, sub entity.Subscription) error
 	DeleteSubscription(ctx context.Context, id uuid.UUID) error
-	ListSubscriptions(ctx context.Context, userID uuid.UUID) ([]entity.Subscription, error)
+	ListSubscriptions(ctx context.Context, userID uuid.UUID, offset int, limit int) ([]entity.Subscription, error)
+	GetTotalByUser(ctx context.Context, userID uuid.UUID) (int, error)
 }
 
 type Report interface {

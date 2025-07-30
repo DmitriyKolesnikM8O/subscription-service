@@ -22,7 +22,7 @@ type SubscriptionService interface {
 		sub entity.Subscription,
 	) error
 	DeleteSubscription(ctx context.Context, id uuid.UUID) error
-	ListSubscriptionsByUser(ctx context.Context, userID uuid.UUID) ([]entity.Subscription, error)
+	ListSubscriptionsByUser(ctx context.Context, userID uuid.UUID, page int, limit int) ([]entity.Subscription, int, error)
 	CalculateTotalCost(
 		ctx context.Context,
 		userID *uuid.UUID,

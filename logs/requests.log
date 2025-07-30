@@ -325,3 +325,15 @@
 {"time":"2025-07-30T09:13:21.640553907Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cb", "status":400,"error":""}
 {"time":"2025-07-30T09:14:50.872994196Z", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
 {"time":"2025-07-30T09:15:09.216941521Z", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-30T09:36:09.443477341Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2025-07-30T09:36:09.501501964Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2025-07-30T09:36:09.504940405Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2025-07-30T09:36:09.507586728Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2025-07-30T09:36:09.920072743Z", "method":"GET","uri":"/swagger/doc.json", "status":200,"error":""}
+{"time":"2025-07-30T09:36:09.933770161Z", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2025-07-30T09:36:32.573767401Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":500,"error":"code=500, message=SubscriptionService.ListSubscriptionsByUser - failed to get total: SubscriptionRepo.ListSubscriptions - rows error: ERROR: bigint out of range (SQLSTATE 22003)"}
+{"time":"2025-07-30T09:36:49.452418946Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&page=1&limit=10", "status":500,"error":"code=500, message=SubscriptionService.ListSubscriptionsByUser - failed to get total: SubscriptionRepo.ListSubscriptions - rows error: ERROR: bigint out of range (SQLSTATE 22003)"}
+{"time":"2025-07-30T09:42:26.867635383Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&page=1&limit=10", "status":200,"error":""}
+{"time":"2025-07-30T09:42:37.694913747Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&page=1&limit=4", "status":200,"error":""}
+{"time":"2025-07-30T09:42:44.318756945Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&page=1&limit=2", "status":200,"error":""}
+{"time":"2025-07-30T09:42:49.174529856Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":200,"error":""}

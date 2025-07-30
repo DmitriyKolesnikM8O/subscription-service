@@ -1,8 +1,10 @@
 package v1
 
+import "github.com/DmitriyKolesnikM8O/subscription-service/internal/entity"
+
 type CreateServiceRequest struct {
-	Name string `json:"name" validate:"required,min=2,max=100"`
-	Price int `json:"price" validate:"required,gt=0"`
+	Name  string `json:"name" validate:"required,min=2,max=100"`
+	Price int    `json:"price" validate:"required,gt=0"`
 }
 
 type CreateRequest struct {
@@ -19,13 +21,13 @@ type CalculateTotalCostRequest struct {
 }
 
 type UpdateServiceRequest struct {
-	Name string `json:"name" validate:"omitempty,min=2,max=100"`
-	Price int `json:"price" validate:"omitempty,gt=0"`
+	Name  string `json:"name" validate:"omitempty,min=2,max=100"`
+	Price int    `json:"price" validate:"omitempty,gt=0"`
 }
 
 type UpdateRequest struct {
-	Service   UpdateServiceRequest `json:"service" validate:"required"`
-	EndDate   string               `json:"end_date" validate:"omitempty,datetime=01-2006"`
+	Service UpdateServiceRequest `json:"service" validate:"required"`
+	EndDate string               `json:"end_date" validate:"omitempty,datetime=01-2006"`
 }
 
 // type ErrorResponse struct {
@@ -34,4 +36,11 @@ type UpdateRequest struct {
 
 type TotalCostResponse struct {
 	Total int `json:"total"`
+}
+
+type PaginatedResponse struct {
+	Items []entity.Subscription `json:"items"`
+	Total int                   `json:"total"`
+	Page  int                   `json:"page"`
+	Limit int                   `json:"limit"`
 }

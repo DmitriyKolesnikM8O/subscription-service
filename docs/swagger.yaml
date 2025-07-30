@@ -18,9 +18,7 @@ definitions:
       id:
         type: string
       service:
-        allOf:
-        - $ref: '#/definitions/entity.Service'
-        description: Embedded service details
+        $ref: '#/definitions/entity.Service'
       start_date:
         type: string
       user_id:
@@ -55,6 +53,19 @@ definitions:
     properties:
       message:
         type: string
+    type: object
+  v1.PaginatedResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/entity.Subscription'
+        type: array
+      limit:
+        type: integer
+      page:
+        type: integer
+      total:
+        type: integer
     type: object
   v1.TotalCostResponse:
     properties:
@@ -93,13 +104,21 @@ info:
 paths:
   /api/v1/subscriptions:
     get:
-      description: Возвращает все подписки указанного пользователя
+      description: Возвращает все подписки указанного пользователя с пагинацией
       parameters:
       - description: ID пользователя
         in: query
         name: user_id
         required: true
         type: string
+      - description: Номер страницы (по умолчанию 1)
+        in: query
+        name: page
+        type: integer
+      - description: Количество записей на странице (по умолчанию 10, максимум 100)
+        in: query
+        name: limit
+        type: integer
       produces:
       - application/json
       responses:
@@ -107,7 +126,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/entity.Subscription'
+              $ref: '#/definitions/v1.PaginatedResponse'
             type: array
         "400":
           description: Bad Request
@@ -123,8 +142,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: Создает новую подписку пользователя. Если сервис с указанным service_id
-        не существует, возвращается ошибка.
+      description: Создает новую подписку пользователя
       parameters:
       - description: Данные подписки
         in: body
@@ -144,7 +162,7 @@ paths:
           schema:
             $ref: '#/definitions/v1.ErrorResponse'
         "404":
-          description: Если сервис с указанным service_id не найден
+          description: Not Found
           schema:
             $ref: '#/definitions/v1.ErrorResponse'
         "500":

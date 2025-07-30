@@ -176,13 +176,24 @@ func (r *SubscriptionRepo) DeleteSubscription(ctx context.Context, id uuid.UUID)
 	return nil
 }
 
-func (r *SubscriptionRepo) ListSubscriptions(ctx context.Context, userID uuid.UUID) ([]entity.Subscription, error) {
+func (r *SubscriptionRepo) GetTotalByUser(ctx context.Context, userID uuid.UUID) (int, error) {
+	var total int
+	err := r.pool.QueryRow(ctx, "SELECT COUNT(*) FROM subscriptions WHERE user_id = $1", userID).Scan(&total)
+	if err != nil {
+		return 0, fmt.Errorf("SubscriptionRepo.GetTotalByUser - query exec: %v", err)
+	}
+	return total, nil
+}
+
+func (r *SubscriptionRepo) ListSubscriptions(ctx context.Context, userID uuid.UUID, offset int, limit int) ([]entity.Subscription, error) {
 	sql, args, err := r.psql.
 		Select("s.id", "s.user_id", "s.start_date", "s.end_date", "s.created_at", "svc.id", "svc.name", "svc.price").
 		From("subscriptions s").
 		Join("services svc ON s.service_id = svc.id").
 		Where("s.user_id = ?", userID).
 		OrderBy("s.start_date DESC").
+		Offset(uint64(offset)).
+		Limit(uint64(limit)).
 		ToSql()
 	if err != nil {
 		return nil, fmt.Errorf("SubscriptionRepo.ListSubscriptions - sql build: %v", err)

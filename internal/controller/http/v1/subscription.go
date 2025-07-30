@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/DmitriyKolesnikM8O/subscription-service/internal/entity"
@@ -279,11 +280,13 @@ func (c *SubscriptionController) Delete(ctx echo.Context) error {
 
 // ListByUser godoc
 // @Summary Список подписок пользователя
-// @Description Возвращает все подписки указанного пользователя
+// @Description Возвращает все подписки указанного пользователя с пагинацией
 // @Tags Subscriptions
 // @Produce json
 // @Param user_id query string true "ID пользователя"
-// @Success 200 {array} entity.Subscription
+// @Param page query int false "Номер страницы (по умолчанию 1)"
+// @Param limit query int false "Количество записей на странице (по умолчанию 10, максимум 100)"
+// @Success 200 {array}  PaginatedResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /api/v1/subscriptions [get]
@@ -298,7 +301,16 @@ func (c *SubscriptionController) ListByUser(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, ErrInvalidUserID)
 	}
 
-	subscriptions, err := c.service.ListSubscriptionsByUser(ctx.Request().Context(), userID)
+	page, err := strconv.Atoi(ctx.QueryParam("page"))
+	if err != nil || page < 1 {
+		page = 1
+	}
+	limit, err := strconv.Atoi(ctx.QueryParam("limit"))
+	if err != nil || limit < 1 || limit > 100 {
+		limit = 10
+	}
+
+	subscriptions, total, err := c.service.ListSubscriptionsByUser(ctx.Request().Context(), userID, page, limit)
 	if err != nil {
 		c.logError("list subscriptions by user", err, log.Fields{
 			"user_id_hash": hashString(userID.String()),
@@ -310,7 +322,12 @@ func (c *SubscriptionController) ListByUser(ctx echo.Context) error {
 		"user_id_hash": hashString(userID.String()),
 		"count":        len(subscriptions),
 	})
-	return ctx.JSON(http.StatusOK, subscriptions)
+	return ctx.JSON(http.StatusOK, PaginatedResponse{
+		Items: subscriptions,
+		Total: total,
+		Page:  page,
+		Limit: limit,
+	})
 }
 
 // CalculateTotalCost godoc

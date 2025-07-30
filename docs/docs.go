@@ -24,7 +24,7 @@ const docTemplate = `{
     "paths": {
         "/api/v1/subscriptions": {
             "get": {
-                "description": "Возвращает все подписки указанного пользователя",
+                "description": "Возвращает все подписки указанного пользователя с пагинацией",
                 "produces": [
                     "application/json"
                 ],
@@ -39,6 +39,18 @@ const docTemplate = `{
                         "name": "user_id",
                         "in": "query",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Номер страницы (по умолчанию 1)",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Количество записей на странице (по умолчанию 10, максимум 100)",
+                        "name": "limit",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -47,7 +59,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/entity.Subscription"
+                                "$ref": "#/definitions/v1.PaginatedResponse"
                             }
                         }
                     },
@@ -66,7 +78,7 @@ const docTemplate = `{
                 }
             },
             "post": {
-                "description": "Создает новую подписку пользователя. Если сервис с указанным service_id не существует, возвращается ошибка.",
+                "description": "Создает новую подписку пользователя",
                 "consumes": [
                     "application/json"
                 ],
@@ -102,7 +114,7 @@ const docTemplate = `{
                         }
                     },
                     "404": {
-                        "description": "Если сервис с указанным service_id не найден",
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/v1.ErrorResponse"
                         }
@@ -339,12 +351,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "service": {
-                    "description": "Embedded service details",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/entity.Service"
-                        }
-                    ]
+                    "$ref": "#/definitions/entity.Service"
                 },
                 "start_date": {
                     "type": "string"
@@ -395,6 +402,26 @@ const docTemplate = `{
             "properties": {
                 "message": {
                     "type": "string"
+                }
+            }
+        },
+        "v1.PaginatedResponse": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Subscription"
+                    }
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
                 }
             }
         },
