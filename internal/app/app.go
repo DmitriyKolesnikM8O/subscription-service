@@ -64,7 +64,7 @@ func Run(configPath string) {
 	log.Info("Initializing controllers")
 	handler := echo.New()
 	handler.Validator = validator.NewValidator()
-	v1.NewRouter(handler, services)
+	v1.NewRouter(handler, services, log.StandardLogger())
 
 	log.Info("Initializing HTTP-server")
 	log.Debugf("Server port: %d", cfg.HTTP.Port)

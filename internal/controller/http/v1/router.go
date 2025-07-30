@@ -12,7 +12,7 @@ import (
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
-func NewRouter(handler *echo.Echo, services service.SubscriptionService) {
+func NewRouter(handler *echo.Echo, services service.SubscriptionService, logger *log.Logger) {
 
 	handler.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format: `{"time":"${time_rfc3339_nano}", "method":"${method}","uri":"${uri}", "status":${status},"error":"${error}"}` + "\n",
@@ -27,12 +27,12 @@ func NewRouter(handler *echo.Echo, services service.SubscriptionService) {
 
 	api := handler.Group("/api/v1")
 	{
-		SetupSubscriptionRoutes(api, services)
+		SetupSubscriptionRoutes(api, services, logger)
 	}
 }
 
-func SetupSubscriptionRoutes(group *echo.Group, subService service.SubscriptionService) {
-	ctrl := NewSubscriptionController(subService)
+func SetupSubscriptionRoutes(group *echo.Group, subService service.SubscriptionService, logger *log.Logger) {
+	ctrl := NewSubscriptionController(subService, logger)
 
 	group.POST("/subscriptions", ctrl.Create)
 	group.GET("/subscriptions/:id", ctrl.GetByID)

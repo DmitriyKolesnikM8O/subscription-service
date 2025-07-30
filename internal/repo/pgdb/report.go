@@ -24,8 +24,8 @@ func NewReportRepo(pg *pgxpool.Pool) *ReportRepo {
 
 func (r *ReportRepo) GetTotalCost(
 	ctx context.Context,
-	userID *uuid.UUID, // Меняем на указатель (может быть nil)
-	serviceName *string, // Также делаем указатель
+	userID *uuid.UUID,
+	serviceName *string,
 	startDate, endDate time.Time,
 ) (int, error) {
 	qb := r.psql.
