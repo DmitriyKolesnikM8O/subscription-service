@@ -27,13 +27,17 @@ func (r *ReportRepo) GetTotalCost(
 	userID *uuid.UUID,
 	serviceName *string,
 	startDate, endDate time.Time,
-) (int, error) {
+) ([]struct {
+	Price     int
+	StartDate time.Time
+	EndDate   *time.Time
+}, error) {
 	qb := r.psql.
-		Select("COALESCE(SUM(svc.price), 0)").
+		Select("svc.price", "s.start_date", "s.end_date").
 		From("subscriptions s").
 		Join("services svc ON s.service_id = svc.id").
-		Where("s.start_date >= ?", startDate).
-		Where("(s.end_date IS NULL OR s.end_date <= ?)", endDate)
+		Where("s.start_date <= ?", endDate).
+		Where("(s.end_date IS NULL OR s.end_date >= ?)", startDate)
 
 	if userID != nil {
 		qb = qb.Where("s.user_id = ?", *userID)
@@ -45,14 +49,35 @@ func (r *ReportRepo) GetTotalCost(
 
 	sql, args, err := qb.ToSql()
 	if err != nil {
-		return 0, fmt.Errorf("ReportRepo.GetTotalCost - sql build: %w", err)
+		return nil, fmt.Errorf("ReportRepo.GetTotalCost - sql build: %w", err)
 	}
 
-	var total int
-	err = r.pool.QueryRow(ctx, sql, args...).Scan(&total)
+	rows, err := r.pool.Query(ctx, sql, args...)
 	if err != nil {
-		return 0, fmt.Errorf("ReportRepo.GetTotalCost - query exec: %w", err)
+		return nil, fmt.Errorf("ReportRepo.GetTotalCostData - query exec: %w", err)
+	}
+	defer rows.Close()
+
+	var costData []struct {
+		Price     int
+		StartDate time.Time
+		EndDate   *time.Time
+	}
+	for rows.Next() {
+		var data struct {
+			Price     int
+			StartDate time.Time
+			EndDate   *time.Time
+		}
+		if err := rows.Scan(&data.Price, &data.StartDate, &data.EndDate); err != nil {
+			return nil, fmt.Errorf("ReportRepo.GetTotalCostData - row scan: %w", err)
+		}
+		costData = append(costData, data)
 	}
 
-	return total, nil
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("ReportRepo.GetTotalCostData - rows error: %w", err)
+	}
+
+	return costData, nil
 }

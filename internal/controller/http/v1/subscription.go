@@ -374,6 +374,14 @@ func (c *SubscriptionController) CalculateTotalCost(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, ErrInvalidDateFormat)
 	}
 
+	if !endDate.After(startDate) && !endDate.Equal(startDate) {
+		c.logError("invalid date range", nil, log.Fields{
+			"start_date": startDate.Format("01-2006"),
+			"end_date":   endDate.Format("01-2006"),
+		})
+		return ctx.JSON(http.StatusBadRequest, ErrInvalidDateRange)
+	}
+
 	var userID *uuid.UUID
 	if req.UserID != "" {
 		parsedUUID, err := uuid.Parse(req.UserID)

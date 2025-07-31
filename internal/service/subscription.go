@@ -132,27 +132,48 @@ func (s *subscriptionService) ListSubscriptionsByUser(
 	return subs, total, nil
 }
 
-// 	subs, err := s.repos.Subscription.ListSubscriptions(ctx, userID)
-// 	if err != nil {
-// 		return nil, fmt.Errorf("SubscriptionService.ListSubscriptionsByUser - repo error: %v", err)
-// 	}
-// 	return subs, nil
-// }
-
 func (s *subscriptionService) CalculateTotalCost(
 	ctx context.Context,
-	userID *uuid.UUID, // Меняем на указатель
-	serviceName *string, // Теперь это указатель на строку
+	userID *uuid.UUID,
+	serviceName *string,
 	startDate, endDate time.Time,
 ) (int, error) {
-	if startDate.After(endDate) {
-		return 0, fmt.Errorf("invalid date range")
-	}
 
-	total, err := s.repos.Report.GetTotalCost(ctx, userID, serviceName, startDate, endDate)
+	subscriptions, err := s.repos.Report.GetTotalCost(ctx, userID, serviceName, startDate, endDate)
 	if err != nil {
 		return 0, fmt.Errorf("service error: %w", err)
 	}
 
-	return total, nil
+	monthMap := make(map[string]bool)
+	totalCost := 0
+
+	for _, data := range subscriptions {
+
+		currentStart := data.StartDate
+		if currentStart.Before(startDate) {
+			currentStart = startDate
+		}
+		currentEnd := data.EndDate
+		if currentEnd != nil && currentEnd.After(endDate) {
+			currentEnd = &endDate
+		}
+		if currentEnd == nil || currentEnd.After(endDate) {
+			currentEnd = &endDate
+		}
+		if currentEnd != nil && currentEnd.Before(currentStart) {
+			continue
+		}
+
+		current := currentStart
+		for !current.After(*currentEnd) {
+			monthKey := current.Format("2006-01")
+			if !monthMap[monthKey] {
+				monthMap[monthKey] = true
+				totalCost += data.Price
+			}
+			current = current.AddDate(0, 1, 0)
+		}
+	}
+
+	return totalCost, nil
 }

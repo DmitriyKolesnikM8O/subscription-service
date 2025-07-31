@@ -337,3 +337,17 @@
 {"time":"2025-07-30T09:42:37.694913747Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&page=1&limit=4", "status":200,"error":""}
 {"time":"2025-07-30T09:42:44.318756945Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&page=1&limit=2", "status":200,"error":""}
 {"time":"2025-07-30T09:42:49.174529856Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":200,"error":""}
+{"time":"2025-07-31T12:29:59.870226896Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?start_date=01-2025&end_date=10-2025", "status":200,"error":""}
+{"time":"2025-07-31T12:31:38.094224911Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&start_date=01-2025&end_date=10-2025", "status":200,"error":""}
+{"time":"2025-07-31T12:32:17.96727204Z", "method":"POST","uri":"/api/v1/subscriptions", "status":400,"error":""}
+{"time":"2025-07-31T12:32:28.13645041Z", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-31T12:33:04.441347175Z", "method":"GET","uri":"/api/v1/subscriptions/30bf2a57-871e-4ddc-b4df-0db89e92708b", "status":200,"error":""}
+{"time":"2025-07-31T12:33:18.737568624Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba", "status":200,"error":""}
+{"time":"2025-07-31T12:33:32.052682833Z", "method":"GET","uri":"/api/v1/subscriptions?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&limit=11", "status":200,"error":""}
+{"time":"2025-07-31T12:33:51.434816213Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&start_date=01-2023&end_date=02-2023", "status":200,"error":""}
+{"time":"2025-07-31T12:33:57.925866022Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&start_date=01-2023&end_date=01-2023", "status":200,"error":""}
+{"time":"2025-07-31T12:34:18.923803549Z", "method":"POST","uri":"/api/v1/subscriptions", "status":201,"error":""}
+{"time":"2025-07-31T12:34:23.736870271Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&start_date=01-2023&end_date=01-2023", "status":200,"error":""}
+{"time":"2025-07-31T12:34:26.887758025Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&start_date=01-2023&end_date=02-2023", "status":200,"error":""}
+{"time":"2025-07-31T12:34:30.84291222Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&start_date=01-2023&end_date=03-2023", "status":200,"error":""}
+{"time":"2025-07-31T12:34:33.620540258Z", "method":"GET","uri":"/api/v1/subscriptions/total-cost?user_id=60601fee-2bf1-4721-ae6f-7636e79a0cba&start_date=01-2023&end_date=04-2023", "status":200,"error":""}
