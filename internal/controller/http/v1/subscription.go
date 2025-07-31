@@ -92,7 +92,7 @@ func (c *SubscriptionController) Create(ctx echo.Context) error {
 		} else {
 			c.logError("validate request", err, nil)
 		}
-		return ctx.JSON(http.StatusBadRequest, ValidationError(err))
+		return ctx.JSON(http.StatusBadRequest, handleValidationError(err))
 	}
 
 	startDate, err := time.Parse("01-2006", req.StartDate)
@@ -205,7 +205,7 @@ func (c *SubscriptionController) Update(ctx echo.Context) error {
 
 	if err := ctx.Validate(req); err != nil {
 		c.logError("validate request", err, nil)
-		return ctx.JSON(http.StatusBadRequest, ValidationError(err))
+		return ctx.JSON(http.StatusBadRequest, handleValidationError(err))
 	}
 
 	var endDate *time.Time
@@ -355,7 +355,7 @@ func (c *SubscriptionController) CalculateTotalCost(ctx echo.Context) error {
 
 	if err := ctx.Validate(req); err != nil {
 		c.logError("validate request", err, nil)
-		return ctx.JSON(http.StatusBadRequest, ValidationError(err))
+		return ctx.JSON(http.StatusBadRequest, handleValidationError(err))
 	}
 
 	startDate, err := time.Parse("01-2006", req.StartDate)
